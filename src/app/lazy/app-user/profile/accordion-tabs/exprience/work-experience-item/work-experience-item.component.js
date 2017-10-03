@@ -87,10 +87,9 @@ var WorkExperienceItemComponent = (function () {
         }
         else {
             this.checkSalaryEarnedValue();
-            var model = this.modelForm.value;
-            model.start_date = ProfileUtilities.parseDateWithFormat(model.start_date);
-            model.end_date = ProfileUtilities.parseDateWithFormat(model.end_date);
-            this.onItemCreate.emit(this.parseModel(ProfileUtilities.parseModel(model, this.fields)));
+            this.modelForm.value.start_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.start_date);
+            this.modelForm.value.end_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.end_date);
+            this.onItemCreate.emit(this.parseModel(ProfileUtilities.parseModel(this.modelForm.value, this.fields)));
         }
     };
     WorkExperienceItemComponent.prototype.onEdit = function () {
@@ -149,6 +148,8 @@ var WorkExperienceItemComponent = (function () {
                 _this.modelForm.disable();
             }
         });
+        this.modelForm.value.start_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.start_date);
+        this.modelForm.value.end_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.end_date);
         var endDateValue = this.modelForm.value.end_date;
         if (endDateValue === this.presentTime) {
             this.modelForm.value.end_date = null;

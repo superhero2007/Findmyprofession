@@ -106,6 +106,8 @@ export class EducationItemComponent implements OnChanges, OnDestroy {
     } else {
       ProfileUtilities.changeModelMode(ProfileTabMode.VIEW, this.modelForm);
       this.modelForm.value.id = this.item.id;
+      this.modelForm.value.start_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.start_date);
+      this.modelForm.value.end_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.end_date);
       this.onItemUpdate.emit(ProfileUtilities.parseModel(this.modelForm.value, this.fields));
     }
   }
@@ -120,6 +122,8 @@ export class EducationItemComponent implements OnChanges, OnDestroy {
     if (isBlank) {
       this.errorMessage = 'Please fill out all fields.';
     } else {
+      this.modelForm.value.start_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.start_date);
+      this.modelForm.value.end_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.end_date);
       this.onItemCreate.emit(this.modelForm.value);
     }
   }

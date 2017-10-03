@@ -128,10 +128,9 @@ export class WorkExperienceItemComponent implements OnChanges, OnInit, OnDestroy
       this.errorMessage = 'Please fill out all fields.';
     } else {
       this.checkSalaryEarnedValue();
-      const model: any = this.modelForm.value;
-      model.start_date = ProfileUtilities.parseDateWithFormat(model.start_date);
-      model.end_date = ProfileUtilities.parseDateWithFormat(model.end_date);
-      this.onItemCreate.emit(this.parseModel(ProfileUtilities.parseModel(model, this.fields)));
+      this.modelForm.value.start_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.start_date);
+      this.modelForm.value.end_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.end_date);
+      this.onItemCreate.emit(this.parseModel(ProfileUtilities.parseModel(this.modelForm.value, this.fields)));
     }
   }
 
@@ -190,6 +189,8 @@ export class WorkExperienceItemComponent implements OnChanges, OnInit, OnDestroy
           this.modelForm.disable();
         }
       });
+    this.modelForm.value.start_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.start_date);
+    this.modelForm.value.end_date = ProfileUtilities.parseDateWithFormat(this.modelForm.value.end_date);
     const endDateValue: string = this.modelForm.value.end_date;
     if (endDateValue === this.presentTime) {
       this.modelForm.value.end_date = null;
